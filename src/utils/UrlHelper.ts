@@ -17,15 +17,15 @@ export class UrlHelper {
   public static ResolveHostingEnvironment(siteUrl: string): HostingEnvironment {
     const host: string = (url.parse(siteUrl)).host;
 
-    if (host.indexOf('.sharepoint.com') !== -1) {
+    if (host.endsWith('.sharepoint.com')) {
       return HostingEnvironment.Production;
-    } else if (host.indexOf('.sharepoint.cn') !== -1) {
+    } else if (host.endsWith('.sharepoint.cn')) {
       return HostingEnvironment.China;
-    } else if (host.indexOf('.sharepoint.de') !== -1) {
+    } else if (host.endsWith('.sharepoint.de')) {
       return HostingEnvironment.German;
-    } else if (host.indexOf('.sharepoint-mil.us') !== -1) {
+    } else if (host.endsWith('.sharepoint-mil.us')) {
       return HostingEnvironment.USDefence;
-    } else if (host.indexOf('.sharepoint.us') !== -1) {
+    } else if (host.endsWith('.sharepoint.us')) {
       return HostingEnvironment.USGovernment;
     }
 

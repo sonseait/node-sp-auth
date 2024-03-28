@@ -52,23 +52,23 @@ const createWindow = () => {
     if (loadedUrl.indexOf(siteUrl) !== -1 && (loadedUrl.indexOf(siteUrl + '/_layouts/15/start.aspx') !== -1 || loadedUrl.indexOf(siteUrl + '/_') === -1)) {
       const session = mainWindow.webContents.session;
       const host = url.parse(siteUrl).hostname;
-      const isOnPrem = host.indexOf('.sharepoint.com') === -1
-        && host.indexOf('.sharepoint.cn') === -1
-        && host.indexOf('.sharepoint.de') === -1
-        && host.indexOf('.sharepoint-mil.us') === -1
-        && host.indexOf('.sharepoint.us') === -1;
+      const isOnPrem = !host.endsWith('.sharepoint.com')
+        && !host.endsWith('.sharepoint.cn')
+        && !host.endsWith('.sharepoint.de')
+        && !host.endsWith('.sharepoint-mil.us')
+        && !host.endsWith('.sharepoint.us');
       let domain;
       if (isOnPrem) {
         domain = host;
-      } else if (host.indexOf('.sharepoint.com') !== -1) {
+      } else if (host.endsWith('.sharepoint.com')) {
         domain = '.sharepoint.com';
-      } else if (host.indexOf('.sharepoint.cn') !== -1) {
+      } else if (host.endsWith('.sharepoint.cn')) {
         domain = '.sharepoint.cn';
-      } else if (host.indexOf('.sharepoint.de') !== -1) {
+      } else if (host.endsWith('.sharepoint.de')) {
         domain = '.sharepoint.de';
-      } else if (host.indexOf('.sharepoint-mil.us') !== -1) {
+      } else if (host.endsWith('.sharepoint-mil.us')) {
         domain = '.sharepoint-mil.us';
-      } else if (host.indexOf('.sharepoint.us') !== -1) {
+      } else if (host.endsWith('.sharepoint.us')) {
         domain = '.sharepoint.us';
       } else {
         throw new Error('Unable to resolve domain');
